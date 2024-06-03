@@ -10,22 +10,12 @@ const invoiceRoutes = require('./routes/invoiceRoutes.js')
 
 // Use CORS middleware
 app.use(cors());
-const mongoDB_url = process.env.DATABASE;
-// MongoDB connection
-const connectionParams = {
-    useNewUrlParser: true,
+const uri = "mongodb+srv://shivamkumar9969:HUoT3DbIM7spNuYS@cluster0.drhzkfr.mongodb.net/myDatabase?retryWrites=true&w=majority&appName=Cluster0";
 
-
-}
-mongoose.connect(mongoDB_url, connectionParams)
-    .then(() => {
-        console.log('Connected to the database ')
-    })
-    .catch((err) => {
-        console.error(`Error connecting to the database. n${err}`);
-    })
-
-
+// Connect to MongoDB
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Database connected successfully'))
+    .catch(err => console.error('Error connecting to the database:', err));
 // Middleware for parsing JSON data
 app.use(bodyParser.json());
 
