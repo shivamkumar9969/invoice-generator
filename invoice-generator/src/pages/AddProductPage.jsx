@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/Header';
 import jsPDF from 'jspdf';
 
-const AddProductPage = ({ setCurrentPage }) => {
+const AddProductPage = ({ }) => {
     const location = useLocation();
     const { state: locationState } = location;
     const initialProducts = locationState?.products || [];
@@ -71,7 +70,7 @@ const AddProductPage = ({ setCurrentPage }) => {
 
     const handleGenerateReceipt = () => {
         navigate('/receipt', { state: { products, totalWithGST: calculateTotalWithGST() } });
-        setCurrentPage('receipt');
+
     };
 
     const handleDownloadReceipt = (receipt) => {

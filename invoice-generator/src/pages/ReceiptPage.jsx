@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import axios from 'axios';
 
-const ReceiptPage = ({ setCurrentPage }) => {
+const ReceiptPage = ({ }) => {
     const location = useLocation();
     const { products, totalWithGST } = location.state;
     const navigate = useNavigate();
@@ -103,7 +103,7 @@ const ReceiptPage = ({ setCurrentPage }) => {
 
     const handleBack = () => {
         navigate('/add-product', { state: { products } });
-        setCurrentPage('add-product');
+
     };
 
     return (
