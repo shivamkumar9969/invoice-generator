@@ -10,15 +10,21 @@ const invoiceRoutes = require('./routes/invoiceRoutes.js')
 
 // Use CORS middleware
 app.use(cors());
-
+const mongoDB_url = process.env.DATABASE;
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/invoice-generator', {
+const connectionParams = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    useUnifiedTopology: true
+}
+mongoose.connect(mongoDB_url, connectionParams)
+    .then(() => {
+        console.log('Connected to the database ')
+    })
+    .catch((err) => {
+        console.error(`Error connecting to the database. n${err}`);
+    })
+
 
 // Middleware for parsing JSON data
 app.use(bodyParser.json());
